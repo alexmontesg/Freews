@@ -1,0 +1,92 @@
+@charset "UTF-8";
+
+hgroup {
+	display: block;
+}
+
+body {
+	margin: 0 auto;
+	width: 58em;
+	font: 10pt/17pt Helvetica, Arial, sans-serif;
+	background: #1d1d1d;
+	color: #d1d1d1;
+}
+
+h2 {
+	font-size: 21pt;
+	padding-top: 1.25em;
+}
+
+.video {
+	width: 18.75em;
+	display: table-cell;
+	padding-right: 3em;
+}
+
+#sortable {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#sortable li {
+	float: left;
+}
+
+.headline {
+	text-align: center;
+}
+
+.timeline {
+	display: table;
+}
+
+.singleVideo {
+	width: 40em;
+}
+
+.singleVideo h2 {
+	text-align: center;
+}
+
+aside {
+	float: right;
+	width: 15em;
+	font-weight: bold;
+}
+
+.right {
+	text-align: right;
+}
+
+.getVideo {
+	width: 40em;
+}
+
+.getVideo .embed {
+	float: left;
+	width: 18em;
+}
+
+.getVideo .download {
+	float: right;
+	width: 18em;
+}
+
+.myVideo {
+	display: table-row;
+}
+
+.myVideo .mejs-container, .myVideo .mejs-video{
+	float: left;
+}
+
+#mapCanvas {
+	width: 30em;
+	height: 30em;
+}
+
+aside #mapCanvas {
+	width: 15em;
+	height: 15em;
+}

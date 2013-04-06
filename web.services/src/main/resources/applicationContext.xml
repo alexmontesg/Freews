@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd   http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+
+	<bean id="bulletinServices" class="impl.rest.BulletinServices">
+		<property name="bulletinManagerService">
+			<ref bean="bulletinManagerService" />
+		</property>
+	</bean>
+
+	<bean id="categoryServices" class="impl.rest.CategoryServices">
+		<property name="categoryManagerService">
+			<ref bean="categoryManagerService" />
+		</property>
+	</bean>
+
+	<bean id="clipServices" class="impl.rest.ClipServices">
+		<property name="clipManagerService">
+			<ref bean="clipManagerService" />
+		</property>
+	</bean>
+
+	<bean id="infographicServices" class="impl.rest.InfographicServices">
+		<property name="infographicManagerService">
+			<ref bean="infographicManagerService" />
+		</property>
+	</bean>
+
+	<bean id="rawVideoServices" class="impl.rest.RawVideoServices">
+		<property name="rawVideoManagerService">
+			<ref bean="rawVideoManagerService" />
+		</property>
+	</bean>
+
+	<bean id="userServices" class="impl.rest.UserServices">
+		<property name="userManagerService">
+			<ref bean="userManagerService" />
+		</property>
+	</bean>
+
+	<bean id="categoryDataService" class="impl.persistence.category.CategoryDAO" />
+	<bean id="infographicDataService" class="impl.persistence.infographic.InfographicDAO" />
+	<bean id="userDataService" class="impl.persistence.user.UserDAO" />
+	<bean id="bulletinDataService" class="impl.persistence.video.BulletinDAO" />
+	<bean id="clipDataService" class="impl.persistence.video.ClipDAO" />
+	<bean id="rawVideoDataService" class="impl.persistence.video.RawVideoDAO" />
+
+	<bean id="clipManagerService" class="impl.business.videomanager.ClipManager">
+		<property name="clipDataService">
+			<ref bean="clipDataService" />
+		</property>
+		<property name="rawVideoDataService">
+			<ref bean="rawVideoDataService" />
+		</property>
+	</bean>
+
+	<bean id="rawVideoManagerService" class="impl.business.videomanager.RawVideoManager">
+		<property name="rawVideoDataService">
+			<ref bean="rawVideoDataService" />
+		</property>
+	</bean>
+
+	<bean id="bulletinManagerService" class="impl.business.videomanager.BulletinManager">
+		<property name="bulletinDataService">
+			<ref bean="bulletinDataService" />
+		</property>
+		<property name="infographicDataService">
+			<ref bean="infographicDataService" />
+		</property>
+	</bean>
+
+	<bean id="categoryManagerService" class="impl.business.categorymanager.CategoryManager">
+		<property name="categoryDataService">
+			<ref bean="categoryDataService" />
+		</property>
+	</bean>
+
+	<bean id="userManagerService" class="impl.business.usermanager.UserManager">
+		<property name="userDataService">
+			<ref bean="userDataService" />
+		</property>
+	</bean>
+
+	<bean id="infographicManagerService" class="impl.business.infographicmanager.InfographicManager">
+		<property name="infographicDataService">
+			<ref bean="infographicDataService" />
+		</property>
+	</bean>
+
+</beans>

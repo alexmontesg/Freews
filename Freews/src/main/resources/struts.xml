@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd ">
+<struts>
+	<constant name="struts.custom.i18n.resources" value="global" />
+	<constant name="struts.multipart.maxSize" value="20971520" />
+	<constant name="struts.multipart.saveDir" value="C:\Entorno\tomcat\webapps\Freews\" />
+	<constant name="struts.action.excludePattern" value="/ws/.*" />
+	<package name="default" namespace="/" extends="struts-default">
+		<interceptors>
+			<interceptor name="login"
+				class="impl.presentation.login.LoginInterceptor" />
+
+			<interceptor-stack name="LoginStack">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="login" />
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="LoginStack" />
+
+		<global-results>
+			<result name="error">/error.html</result>
+			<result name="login" type="redirect">/public/login.jsp</result>
+			<result name="register" type="redirect">/public/register.jsp</result>
+		</global-results>
+
+		<action name="SeekVideos" class="impl.presentation.seekvideos.SeekVideosAction">
+			<result>/WEB-INF/jsps/index.jsp</result>
+		</action>
+		<action name="AppendVideos"
+			class="impl.presentation.appendvideos.AppendVideosAction">
+			<result>/WEB-INF/jsps/appended.jsp</result>
+			<result name="input">/WEB-INF/jsps/timeline.jsp</result>
+		</action>
+		<action name="ShowTimeline"
+			class="impl.presentation.appendvideos.ShowTimelineAction">
+			<result>/WEB-INF/jsps/timeline.jsp</result>
+			<result name="input">/WEB-INF/jsps/index.jsp</result>
+		</action>
+		<action name="SeeMoreInfo" class="impl.presentation.seekvideos.SeeMoreInfoAction">
+			<result>/WEB-INF/jsps/info.jsp</result>
+			<result name="input">/WEB-INF/jsps/index.jsp</result>
+		</action>
+		<action name="Search" class="impl.presentation.seekvideos.SearchAction">
+			<result>/WEB-INF/jsps/search.jsp</result>
+			<result name="input">/WEB-INF/jsps/index.jsp</result>
+		</action>
+		<action name="DownloadBulletin"
+			class="impl.presentation.download.DownloadBulletinAction">
+			<result>/WEB-INF/jsps/index.jsp</result>
+			<result name="input">/WEB-INF/jsps/index.jsp</result>
+		</action>
+		<action name="MyVideos" class="impl.presentation.seekvideos.MyVideosAction">
+			<result>/WEB-INF/jsps/myVideos.jsp</result>
+			<result name="input">/WEB-INF/jsps/index.jsp</result>
+		</action>
+		<action name="UploadRaw" class="impl.presentation.upload.UploadRawAction">
+			<interceptor-ref name="LoginStack" />
+			<interceptor-ref name="exception" />
+			<interceptor-ref name="i18n" />
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">video/mp4</param>
+				<param name="maximumSize">20971520</param>
+			</interceptor-ref>
+			<interceptor-ref name="params">
+				<param name="excludeParams">dojo\..*,^struts\..*</param>
+			</interceptor-ref>
+			<interceptor-ref name="validation">
+				<param name="excludeMethods">input,back,cancel,browse</param>
+			</interceptor-ref>
+			<interceptor-ref name="workflow">
+				<param name="excludeMethods">input,back,cancel,browse</param>
+			</interceptor-ref>
+			<result>/WEB-INF/jsps/processing.jsp</result>
+			<result name="input">/WEB-INF/jsps/uploadRaw.jsp</result>
+		</action>
+		<action name="UploadRawForm" class="impl.presentation.upload.UploadRawFormAction">
+			<result>/WEB-INF/jsps/uploadRaw.jsp</result>
+		</action>
+		<action name="Logout" class="impl.presentation.login.LogoutAction">
+			<result type="redirect">/public/login.jsp</result>
+		</action>
+	</package>
+
+	<package name="admin" namespace="/admin" extends="struts-default">
+		<interceptors>
+			<interceptor name="login"
+				class="impl.presentation.login.LoginInterceptor" />
+
+			<interceptor-stack name="LoginStack">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="login" />
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="LoginStack" />
+
+		<global-results>
+			<result name="error">/error.html</result>
+			<result name="login" type="redirect">/public/login.jsp</result>
+			<result name="register" type="redirect">/public/register.jsp</result>
+		</global-results>
+		<action name="DownloadRaw" class="impl.presentation.download.DownloadRawAction">
+			<result>/WEB-INF/jsps/index.jsp</result>
+			<result name="input">/WEB-INF/jsps/index.jsp</result>
+		</action>
+		<action name="UploadClip" class="impl.presentation.upload.UploadClipAction">
+			<interceptor-ref name="LoginStack" />
+			<interceptor-ref name="exception" />
+			<interceptor-ref name="i18n" />
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">video/mp4</param>
+				<param name="maximumSize">20971520</param>
+			</interceptor-ref>
+			<interceptor-ref name="params">
+				<param name="excludeParams">dojo\..*,^struts\..*</param>
+			</interceptor-ref>
+			<interceptor-ref name="validation">
+				<param name="excludeMethods">input,back,cancel,browse</param>
+			</interceptor-ref>
+			<interceptor-ref name="workflow">
+				<param name="excludeMethods">input,back,cancel,browse</param>
+			</interceptor-ref>
+			<result>/WEB-INF/jsps/admin/processing.jsp</result>
+			<result name="input">/WEB-INF/jsps/admin/uploadClip.jsp</result>
+		</action>
+		<action name="UploadInfographic" class="impl.presentation.upload.UploadInfographicAction">
+			<interceptor-ref name="LoginStack" />
+			<interceptor-ref name="exception" />
+			<interceptor-ref name="i18n" />
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">video/mp4</param>
+				<param name="maximumSize">20971520</param>
+			</interceptor-ref>
+			<interceptor-ref name="params">
+				<param name="excludeParams">dojo\..*,^struts\..*</param>
+			</interceptor-ref>
+			<interceptor-ref name="validation">
+				<param name="excludeMethods">input,back,cancel,browse</param>
+			</interceptor-ref>
+			<interceptor-ref name="workflow">
+				<param name="excludeMethods">input,back,cancel,browse</param>
+			</interceptor-ref>
+			<result>/WEB-INF/jsps/admin/processing.jsp</result>
+			<result name="input">/WEB-INF/jsps/admin/uploadInfographic.jsp</result>
+		</action>
+		<action name="AdminPanel" class="impl.presentation.seekvideos.LoadRawVideosAction">
+			<result>/WEB-INF/jsps/admin/adminPanel.jsp</result>
+		</action>
+		<action name="UploadInfographicForm"
+			class="impl.presentation.upload.UploadInfographicFormAction">
+			<result>/WEB-INF/jsps/admin/uploadInfographic.jsp</result>
+		</action>
+		<action name="MakeClip" class="impl.presentation.upload.MakeClipAction">
+			<result>/WEB-INF/jsps/admin/uploadClip.jsp</result>
+			<result name="input">/WEB-INF/jsps/admin/adminPanel.jsp</result>
+		</action>
+		<action name="DeleteRawVideo" class="impl.presentation.delete.DeleteRawVideoAction">
+			<result type="chain">AdminPanel</result>
+			<result name="input">/WEB-INF/jsps/admin/adminPanel.jsp</result>
+		</action>
+		<action name="AddCategory" class="impl.presentation.categories.AddCategoryAction">
+			<result name="input">UploadInfographicForm</result>
+			<result>/WEB-INF/jsps/admin/adminPanel.jsp</result>
+		</action>
+		<action name="DeleteClip" class="impl.presentation.delete.DeleteClipAction">
+			<result name="input">DeleteClip</result>
+			<result type="redirectAction">
+				<param name="actionName">SeekVideos</param>
+				<param name="namespace">/</param>
+			</result>
+		</action>
+		<action name="EditClipForm" class="impl.presentation.edit.EditClipFormAction">
+			<result name="input">EditClipForm</result>
+			<result>/WEB-INF/jsps/admin/editClip.jsp</result>
+		</action>
+		<action name="EditClip" class="impl.presentation.edit.EditClipAction">
+			<result name="input">EditClipForm</result>
+			<result type="redirectAction">
+				<param name="actionName">SeekVideos</param>
+				<param name="namespace">/</param>
+			</result>
+		</action>
+	</package>
+
+	<package name="public" namespace="/public" extends="struts-default">
+
+		<interceptors>
+			<interceptor name="login"
+				class="impl.presentation.login.LoginInterceptor" />
+
+			<interceptor-stack name="LoginStack">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="login" />
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="LoginStack" />
+
+		<global-results>
+			<result name="error">/error.html</result>
+			<result name="login" type="redirect">/public/login.jsp</result>
+			<result name="register" type="redirect">/public/register.jsp</result>
+		</global-results>
+		<action name="Setup" class="impl.presentation.SetupAction">
+			<result type="chain">
+				<param name="actionName">SeekVideos</param>
+				<param name="namespace">/</param>
+			</result>
+		</action>
+		<action name="Login" class="impl.presentation.login.LoginAction">
+			<result name="input">/public/login.jsp</result>
+			<result type="redirectAction">
+				<param name="actionName">SeekVideos</param>
+				<param name="namespace">/</param>
+			</result>
+		</action>
+		<action name="Register" class="impl.presentation.register.RegisterAction">
+			<result type="redirectAction">
+				<param name="actionName">SeekVideos</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="input">/public/register.jsp</result>
+		</action>
+		<action name="FacebookLogin" class="impl.presentation.login.FacebookLoginAction">
+			<result type="redirectAction">
+				<param name="actionName">SeekVideos</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="input">/public/login.jsp</result>
+		</action>
+	</package>
+
+</struts>
