@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.springframework.data.mongodb.core.MongoOperations;
 
+import com.model.Rating;
 import com.model.Video;
 
 /**
@@ -40,6 +41,11 @@ public class ClipDAO extends AbstractClipDAO {
 	@Override
 	protected void deleteAllImpl(MongoOperations op) {
 		op.dropCollection(CLIPS);
+	}
+	
+	@Override
+	protected void rateImpl(Rating rating, MongoOperations op) {
+		op.save(rating);
 	}
 
 }

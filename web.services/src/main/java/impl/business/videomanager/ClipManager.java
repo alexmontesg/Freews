@@ -21,6 +21,7 @@ import util.videos.VideosUtil;
 import util.zemanta.ZemantaHelper;
 
 import com.business.ClipManagerService;
+import com.model.Rating;
 import com.model.Video;
 import com.persistence.ClipDataService;
 import com.persistence.RawVideoDataService;
@@ -204,6 +205,15 @@ public class ClipManager implements ClipManagerService {
 		}
 	}
 
+	public void rateClip(String video_id, String user_id, double score) {
+		Rating r = new Rating();
+		r.setCreated_at(new Date());
+		r.setItem_id(video_id);
+		r.setPreference(score);
+		r.setUser_id(user_id);
+		clipDataService.rate(r);
+	}
+
 	/**
 	 * Renames the files related to a {@link Video clip} when the identifier
 	 * changes
@@ -299,10 +309,6 @@ public class ClipManager implements ClipManagerService {
 				log.error(e.getMessage());
 			}
 		}
-	}
-
-	public void rateClip(String video_id, String user_id, double score) {
-		// TODO Auto-generated method stub
 	}
 
 }

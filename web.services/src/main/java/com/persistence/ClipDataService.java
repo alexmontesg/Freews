@@ -2,6 +2,7 @@ package com.persistence;
 
 import java.util.Collection;
 
+import com.model.Rating;
 import com.model.Video;
 
 /**
@@ -76,5 +77,13 @@ public interface ClipDataService {
 	 * Deletes all the {@link Video clips} from the database
 	 */
 	public void deleteAll();
+
+	/**
+	 * Adds a {@link Rating}
+	 * 
+	 * @param rating
+	 *            The {@link Rating} to be added
+	 */
+	public void rate(Rating rating);
 
 }

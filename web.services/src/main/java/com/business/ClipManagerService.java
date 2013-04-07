@@ -124,7 +124,7 @@ public interface ClipManagerService {
 			String id, Date takenDate, Double lat, Double lon);
 
 	/**
-	 * Adds the rating of a {@link Video clip} of a specific user
+	 * Adds the rating of a {@link Video clip} by a specific {@link User}
 	 * 
 	 * @param video_id
 	 *            The identifier of the {@link Video} to rate

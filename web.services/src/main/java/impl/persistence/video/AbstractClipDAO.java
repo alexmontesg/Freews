@@ -18,6 +18,7 @@ import org.springframework.data.mongodb.core.MongoOperations;
 
 import util.config.Config;
 
+import com.model.Rating;
 import com.model.Video;
 import com.persistence.ClipDataService;
 
@@ -202,6 +203,21 @@ public abstract class AbstractClipDAO implements ClipDataService {
 	 *            The {@link MongoOperations} that performs the operation
 	 */
 	protected abstract void deleteClipImpl(String id, MongoOperations op);
+
+	public void rate(Rating rating) {
+		rateImpl(rating, getOperationHandler());
+	}
+
+	/**
+	 * Implementation of the {@link #rate(Rating)} method to work with Spring
+	 * Data and MongoDB
+	 * 
+	 * @param rating
+	 *            The rating to be added
+	 * @param op
+	 *            The {@link MongoOperations} that performs the operation
+	 */
+	protected abstract void rateImpl(Rating rating, MongoOperations op);
 
 	/**
 	 * Adds a {@link Video} to Solr
